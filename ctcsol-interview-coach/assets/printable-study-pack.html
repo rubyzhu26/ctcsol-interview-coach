@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTCSOL 说课试讲备考打印包</title>
+  <style>
+    :root {
+      --ink: #202733;
+      --muted: #68717d;
+      --line: #d8d5cc;
+      --paper: #fbf8f0;
+      --canvas: #e9e4da;
+      --blue: #26415f;
+      --blue-soft: #eaf0f4;
+      --amber: #a96818;
+      --amber-soft: #f7e9ad;
+      --green: #41695b;
+      --green-soft: #edf4ee;
+      --rose: #a74242;
+      --rose-soft: #f8e9e6;
+    }
+
+    * { box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 13mm 14mm 14mm;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.62;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(37, 41, 54, .92);
+      color: #fff;
+    }
+
+    .toolbar button {
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 18px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .document {
+      width: 210mm;
+      margin: 18px auto 36px;
+      padding: 14mm;
+      background: var(--paper);
+      box-shadow: 0 12px 36px rgba(37, 41, 54, .12);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 5px; font-family: "Songti SC", "STSong", "SimSun", serif; font-size: 23pt; line-height: 1.22; letter-spacing: -.02em; }
+    h2 { margin: 22px 0 12px; font-size: 15pt; color: var(--blue); break-after: avoid; }
+    h3 { margin: 0 0 7px; font-size: 11.5pt; break-after: avoid; }
+    p { margin-bottom: 9px; }
+
+    .eyebrow {
+      margin-bottom: 5px;
+      color: var(--blue);
+      font-size: 9pt;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .subtitle { color: var(--muted); }
+    .rule { height: 4px; margin: 15px 0 18px; border-radius: 4px; background: linear-gradient(90deg, var(--blue) 0 48%, #e1ac43 48% 74%, var(--green) 74%); }
+
+    .meta-grid, .flow-grid, .two-col, .quick-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .meta-grid { grid-template-columns: repeat(4, 1fr); }
+    .flow-grid { grid-template-columns: repeat(4, 1fr); }
+    .two-col { grid-template-columns: 1fr 1fr; }
+    .quick-grid { grid-template-columns: 1.05fr .95fr; }
+
+    .meta, .card, .flow-step, .note, .board, .warning {
+      break-inside: avoid;
+      border-radius: 6px;
+    }
+
+    .meta {
+      min-height: 56px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .label { display: block; margin-bottom: 3px; color: var(--muted); font-size: 8.5pt; font-weight: 700; }
+    .value { font-weight: 750; }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--blue);
+    }
+
+    .section-number {
+      display: inline-grid;
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      place-items: center;
+      border-radius: 3px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 10pt;
+      font-weight: 850;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 88px;
+      padding: 12px;
+      border: 1px solid #cdd8f2;
+      background: var(--blue-soft);
+    }
+
+    .flow-step b { display: block; margin-bottom: 5px; color: var(--blue); }
+    .flow-step p { margin: 0; font-size: 9pt; }
+
+    .script {
+      padding: 14px 16px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      white-space: pre-wrap;
+    }
+
+    mark.keyword {
+      padding: 0 .18em;
+      color: inherit;
+      background: linear-gradient(transparent 46%, var(--amber-soft) 46%);
+      font-weight: 750;
+    }
+
+    .stage {
+      display: grid;
+      grid-template-columns: 31mm 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--line);
+      break-inside: avoid;
+    }
+
+    .stage:last-child { border-bottom: 0; }
+    .time { color: var(--blue); font-weight: 850; }
+    .stage-name { font-size: 12pt; font-weight: 850; }
+    .teacher { margin-top: 7px; }
+
+    .student, .feedback, .action {
+      display: inline-block;
+      margin: 4px 4px 0 0;
+      padding: 3px 7px;
+      border-radius: 3px;
+      font-size: 9pt;
+    }
+
+    .student { background: var(--blue-soft); }
+    .feedback { background: var(--amber-soft); }
+    .action { color: var(--muted); border: 1px dashed var(--line); }
+
+    .board {
+      padding: 13px 15px;
+      border: 2px solid var(--green);
+      background: var(--green-soft);
+    }
+
+    .board h3 { color: var(--green); }
+    .board pre { margin: 0; font-family: "SFMono-Regular", Consolas, monospace; white-space: pre-wrap; }
+
+    .note, .warning, .card { padding: 12px 14px; }
+    .note { border-left: 4px solid var(--amber); background: #fffaf0; }
+    .warning { border-left: 4px solid var(--rose); background: var(--rose-soft); }
+    .card { border: 1px solid var(--line); background: #fff; }
+    .card ul, .note ul, .warning ul { margin: 4px 0 0; padding-left: 18px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 8.7pt; }
+    th, td { padding: 7px; border: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--blue); background: var(--blue-soft); text-align: left; }
+    tr { break-inside: avoid; }
+
+    .page-break { break-before: page; page-break-before: always; }
+    .board-section { break-inside: avoid; }
+
+    .quick-card {
+      min-height: 257mm;
+      padding-top: 1mm;
+    }
+
+    .quick-card h1 { font-size: 20pt; }
+    .quick-card h2 { margin-top: 13px; font-size: 12.5pt; }
+    .quick-card .card { padding: 9px 11px; }
+    .quick-card p, .quick-card li { font-size: 9.2pt; line-height: 1.48; }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 8px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 8.3pt;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 850px) {
+      .document { width: auto; margin: 0; padding: 22px; box-shadow: none; }
+      .meta-grid, .flow-grid { grid-template-columns: 1fr 1fr; }
+      .two-col, .quick-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none !important; }
+      .document { width: auto; margin: 0; padding: 0; box-shadow: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <span>建议使用 A4、纵向、100% 比例</span>
+    <button type="button" onclick="window.print()">打印 / 保存为 PDF</button>
+  </div>
+
+  <main class="document">
+    <!-- 生成时替换所有方括号占位内容，删掉不适用的提示，不保留空模块。 -->
+    <header>
+      <div class="eyebrow">CTCSOL Interview Practice</div>
+      <h1>[教学点名称]｜说课试讲备考打印包</h1>
+      <p class="subtitle">从陌生材料到可开口练习的 3 分钟说课与 7 分钟试讲</p>
+      <div class="rule"></div>
+      <div class="meta-grid">
+        <div class="meta"><span class="label">学习者水平</span><span class="value">[水平或范围]</span></div>
+        <div class="meta"><span class="label">教学微目标</span><span class="value">[可观察目标]</span></div>
+        <div class="meta"><span class="label">主场景</span><span class="value">[真实交际场景]</span></div>
+        <div class="meta"><span class="label">练习版本</span><span class="value">[日期 / 第几稿]</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2 class="section-title"><span class="section-number">1</span>材料与教学决定</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>题面依据</h3>
+          <p>[忠实摘录材料中的关键句，并说明教学点出现在哪里。]</p>
+        </div>
+        <div class="card">
+          <h3>本次只讲什么</h3>
+          <p><mark class="keyword">[七分钟内可讲清的微用法]</mark></p>
+          <p>主动舍弃：[不在本次展开的相关内容]</p>
+        </div>
+      </div>
+      <div class="note" style="margin-top:10px">
+        <strong>目标—检测闭环：</strong>[学生最后需要说出或完成什么，教师如何判断达成。]
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"><span class="section-number">2</span>3 分钟说课流程</h2>
+      <div class="flow-grid">
+        <div class="flow-step"><b>第一步｜教谁、教什么</b><p>[对象、水平、课型、教学点]</p></div>
+        <div class="flow-step"><b>第二步｜为什么这样教</b><p>[目标、重点难点、选点理由]</p></div>
+        <div class="flow-step"><b>第三步｜准备怎么教</b><p>[导入、讲解、操练、活动与板书]</p></div>
+        <div class="flow-step"><b>第四步｜怎样收束</b><p>[检测、总结、作业和课时位置]</p></div>
+      </div>
+
+      <h3 style="margin-top:16px">说课参考稿</h3>
+      <div class="script">[生成口语化、可朗读的完整说课稿。用 &lt;mark class="keyword"&gt;…&lt;/mark&gt; 标出真正需要记住的关键词；每段对应上方一个流程步骤。]</div>
+
+      <div class="two-col" style="margin-top:10px">
+        <div class="note"><strong>最容易忘记的三个锚点</strong><ul><li>[锚点 1]</li><li>[锚点 2]</li><li>[锚点 3]</li></ul></div>
+        <div class="warning"><strong>超时先删</strong><ul><li>[可删内容]</li><li>[不能删的目标结构与检测]</li></ul></div>
+      </div>
+    </section>
+
+    <section class="page-break">
+      <h2 class="section-title"><span class="section-number">3</span>7 分钟试讲分镜</h2>
+      <table>
+        <thead><tr><th>时间</th><th>环节</th><th>教师说 / 做</th><th>学生产出</th><th>反馈纠错</th><th>板书</th></tr></thead>
+        <tbody>
+          <tr><td>00:00–00:45</td><td>导入</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+          <tr><td>00:45–02:00</td><td>发现与讲解</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+          <tr><td>02:00–03:15</td><td>控制性操练</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+          <tr><td>03:15–04:30</td><td>半控制操练</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+          <tr><td>04:30–06:15</td><td>交际活动</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+          <tr><td>06:15–07:00</td><td>检测与收束</td><td>[内容]</td><td>[内容]</td><td>[内容]</td><td>[内容]</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:16px">连续试讲台词</h3>
+      <div class="stage">
+        <div><div class="time">00:00–00:45</div><div class="stage-name">导入</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[预设回答]</span><span class="feedback">反馈：[具体回应]</span><span class="action">【动作 / 眼神 / 等待】</span></div>
+      </div>
+      <div class="stage">
+        <div><div class="time">00:45–02:00</div><div class="stage-name">发现与讲解</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[预设回答]</span><span class="feedback">纠错：[错误形式 → 自然形式]</span><span class="action">【板书①】</span></div>
+      </div>
+      <div class="stage">
+        <div><div class="time">02:00–03:15</div><div class="stage-name">控制性操练</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[目标句]</span><span class="feedback">反馈：[复述正确形式并说明]</span><span class="action">【板书②】</span></div>
+      </div>
+      <div class="stage">
+        <div><div class="time">03:15–04:30</div><div class="stage-name">半控制操练</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[带选择空间的表达]</span><span class="feedback">追问：[让学生扩展]</span><span class="action">【巡视 / 点名 / 等待】</span></div>
+      </div>
+      <div class="stage">
+        <div><div class="time">04:30–06:15</div><div class="stage-name">交际活动</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[完成交际任务]</span><span class="feedback">反馈：[回应内容与语言]</span><span class="action">【角色转换】</span></div>
+      </div>
+      <div class="stage">
+        <div><div class="time">06:15–07:00</div><div class="stage-name">检测与收束</div></div>
+        <div><div class="teacher">[教师实际说的话]</div><span class="student">学生：[独立产出]</span><span class="feedback">反馈：[确认是否达标]</span><span class="action">【总结 / 作业】</span></div>
+      </div>
+    </section>
+
+    <section class="board-section">
+      <h2 class="section-title"><span class="section-number">4</span>动态板书</h2>
+      <div class="board">
+        <h3>最终板书</h3>
+        <pre>[生成横向分区清楚、考生可在七分钟内逐步写出的板书布局]</pre>
+      </div>
+      <div class="note" style="margin-top:10px"><strong>形成顺序：</strong>【板书①】[内容] → 【板书②】[内容] → 【板书③】[内容]</div>
+    </section>
+
+    <section class="quick-card page-break">
+      <div class="eyebrow">One-page Review Card</div>
+      <h1>[教学点名称]｜一页速记卡</h1>
+      <p class="subtitle">上场前只看这一页：记逻辑，不背整篇。</p>
+      <div class="rule"></div>
+
+      <div class="quick-grid">
+        <div>
+          <div class="card">
+            <h3>一句话教学目标</h3>
+            <p><mark class="keyword">[学生能在什么场景，用什么形式完成什么表达]</mark></p>
+          </div>
+          <h2>3 分钟说课四步</h2>
+          <div class="card"><strong>① 教谁、教什么：</strong>[关键词]</div>
+          <div class="card"><strong>② 为什么这样教：</strong>[关键词]</div>
+          <div class="card"><strong>③ 准备怎么教：</strong>[关键词]</div>
+          <div class="card"><strong>④ 怎样收束：</strong>[关键词]</div>
+
+          <h2>7 分钟时间轴</h2>
+          <div class="card">
+            <p><strong>00:00</strong> [导入锚点]</p>
+            <p><strong>00:45</strong> [发现与讲解锚点]</p>
+            <p><strong>02:00</strong> [控制练习锚点]</p>
+            <p><strong>03:15</strong> [半控制练习锚点]</p>
+            <p><strong>04:30</strong> [交际活动锚点]</p>
+            <p><strong>06:15</strong> [检测与收束锚点]</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="board">
+            <h3>板书缩略图</h3>
+            <pre>[最终板书]</pre>
+          </div>
+
+          <h2>互动台词</h2>
+          <div class="card">
+            <p><strong>提问：</strong>[关键提问]</p>
+            <p><strong>等待：</strong>……</p>
+            <p><strong>复述：</strong>[复述学生正确答案]</p>
+            <p><strong>纠错：</strong>[典型错误及处理]</p>
+            <p><strong>追问：</strong>[让学生多说一步]</p>
+          </div>
+
+          <h2>上场提醒</h2>
+          <div class="warning">
+            <ul>
+              <li>[必须说出的核心句]</li>
+              <li>[最容易超时的位置]</li>
+              <li>[不能漏掉的学生产出]</li>
+              <li>[最后检测]</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">本资料用于个人备考练习；参考稿请根据个人语速和表达习惯调整，不构成考试结果承诺。</div>
+    </section>
+  </main>
+</body>
+</html>
