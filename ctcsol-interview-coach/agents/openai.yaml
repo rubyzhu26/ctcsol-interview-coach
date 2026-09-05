@@ -1,4 +1,4 @@
 interface:
-  display_name: "CTCSOL说课试讲陪练"
-  short_description: "帮助CTCSOL考生从材料生成说课、试讲与复盘方案"
-  default_prompt: "使用 $ctcsol-interview-coach 分析这份考试材料，先给我候选教学点和理由。"
+  display_name: "CTCSOL AI 陪练"
+  short_description: "生成参考资料，或陪你自己开口试讲"
+  default_prompt: "使用 $ctcsol-interview-coach 帮我准备这道题。先问我想生成参考资料，还是开口陪练。"
